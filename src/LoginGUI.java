@@ -54,9 +54,8 @@ public class LoginGUI extends JFrame implements ActionListener {
         if (!userName.isEmpty() && !password.isEmpty()) {
             message.setText(" Hello " + userName);
             productGUI = new ProductGUI();
-            productGUI.name(userName);
-            productGUI.setVisible(true);
-            this.setVisible(false);
+          //  this.setVisible(false);
+
         } else {
             message.setText(" Invalid user.. ");
         }
