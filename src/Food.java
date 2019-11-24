@@ -1,17 +1,14 @@
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 
 public class Food implements Products {
 
-    private HashMap<String, String> product = new HashMap<String, String>();
+  //  private HashMap<String, String> product = new HashMap<String, String>();
     private String name;
     private String price;
+    private ArrayList<String> products = new ArrayList<String>();
 
-    public Food(String name, String price) {
-        this.name = name;
-        this.price = price;
-        product.put(name, price);
-    }
+
 
     public Food() {
 
@@ -19,12 +16,13 @@ public class Food implements Products {
 
     @Override
     public void setName(String s) {
-        this.name = s;
+       products.add(s);
 
     }
 
     @Override
     public String getName() {
+        name = products.toString();
         return name;
     }
 
@@ -40,13 +38,6 @@ public class Food implements Products {
         return price;
     }
 
-    public String getList() {
-        Iterator<String> keySetIterator = product.keySet().iterator();
 
-
-            String key = keySetIterator.next();
-            return key + product.get(key);
-
-    }
 }
 
