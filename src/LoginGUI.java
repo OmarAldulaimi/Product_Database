@@ -9,86 +9,90 @@ import javax.swing.text.DefaultCaret;
 
 public class LoginGUI extends JFrame implements ActionListener {
 
-    private JPanel panel;
-    private JLabel user_label, password_label, message;
-    private JTextField userName_text;
-    private JPasswordField password_text;
-    private JButton submit;
-    private ProductGUI productGUI;
+    JLabel nameLabel=new JLabel("NAME");
+    JLabel passwordLabel=new JLabel("PASSWORD");
+    JTextField nameTextField=new JTextField();
+    JPasswordField passwordField=new JPasswordField();
+    JButton registerButton=new JButton("NEW USER");
+    JButton loginButton=new JButton("LOGIN");
 
-    public LoginGUI() {
 
-        // Username Label
-        user_label = new JLabel();
-        user_label.setText("User Name :");
-        userName_text = new JTextField();
+    public LoginGUI (){
+        createWindow();
+        setLocationAndSize();
+        addComponentsToFrame();
 
-        // Password Label
-        password_label = new JLabel();
-        password_label.setText("Password :");
-        password_text = new JPasswordField();
-
-        // Submit
-        submit = new JButton("SUBMIT");
-
-        panel = new JPanel(new GridLayout(3, 1));
-        panel.add(user_label);
-        panel.add(userName_text);
-        panel.add(password_label);
-        panel.add(password_text);
-
-        message = new JLabel();
-        panel.add(message);
-        panel.add(submit);
-
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        // Adding the listeners to components..
-        submit.addActionListener(this);
-        add(panel, BorderLayout.CENTER);
-        setTitle("Please Login Here !");
-        setSize(300,200);
-        setVisible(true);
+    }
+    public void createWindow()
+    {
+        this.setTitle("Registration Form");
+        this.setBounds(40,40,380,350);
+        this.getContentPane().setBackground(Color.pink);
+        this.getContentPane().setLayout(null);
+        this.setVisible(true);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setResizable(false);
+    }
+    public void setLocationAndSize()
+    {
+        nameLabel.setBounds(20,20,40,70);;
+        passwordLabel.setBounds(20,75,80,70);
+        nameTextField.setBounds(180,43,140,23);
+        passwordField.setBounds(180,93,140,23);
+        registerButton.setBounds(70,180,100,35);
+        loginButton.setBounds(200,180,100,35);
+    }
+    public void addComponentsToFrame()
+    {
+        this.add(nameLabel);
+        this.add(passwordLabel);
+        this.add(nameTextField);
+        this.add(passwordField);
+        this.add(registerButton);
+        this.add(loginButton);
     }
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-        String userName = userName_text.getText();
-        String password = password_text.getText();
-       /** if (ae.getSource() == submit) {
-            try {
-                Class.forName("com.mysql.jdbc.Driver").newInstance();
-                //Creating Connection Object
-                Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/myDatabase?autoReconnect=true&useSSL=false", "root", "omar7712378");
-                //Preapared Statement
-                PreparedStatement Pstatement = connection.prepareStatement("insert into users values(?,?)");
-                //Specifying the values of it's parameter
-                Pstatement.setString(1, userName);
-                Pstatement.setString(2, password);
+        PreparedStatement Pstatement = null;
+        String userName = nameTextField.getText();
+        String password = passwordField.getText();
+       if (ae.getSource() == loginButton) {
 
+           try {
+               Class.forName("com.mysql.jdbc.Driver").newInstance();
+           } catch (InstantiationException e) {
+               e.printStackTrace();
+           } catch (IllegalAccessException e) {
+               e.printStackTrace();
+           } catch (ClassNotFoundException e) {
+               e.printStackTrace();
+           }
+           //Creating Connection Object
+           Connection connection = null;
+           try {
+               connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/myDatabase?autoReconnect=true&useSSL=false", "root", "omar7712378");
+           //Preapared Statement
 
-                JOptionPane.showMessageDialog(null, "Data Registered Successfully");
+               Pstatement = connection.prepareStatement("insert into users values(?,?)");
+               Pstatement.setString(1, userName);
+               Pstatement.setString(2, password);
+               Pstatement.executeUpdate();
+               JOptionPane.showMessageDialog(null, "Data Registered Successfully");
+           } catch (SQLException e) {
+               e.printStackTrace();
 
+           }
 
-            } catch (SQLException e1) {
-                e1.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }**/
+       /**    if (!userName.isEmpty() && !password.isEmpty()) {
+            message.setText(" Hello " + userName);
+              productGUI = new ProductGUI();
+           this.setVisible(false);
 
+          } else {
+               message.setText(" Invalid user.. ");**/
 
-              if (!userName.isEmpty() && !password.isEmpty()) {
-               message.setText(" Hello " + userName);
-                 productGUI = new ProductGUI();
-              this.setVisible(false);
-
-             } else {
-                  message.setText(" Invalid user.. ");
-              }
-
-    }
+       }
 }
+}
+
