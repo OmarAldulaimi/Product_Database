@@ -1,5 +1,9 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import javax.swing.*;
 import javax.swing.text.DefaultCaret;
 
@@ -51,13 +55,40 @@ public class LoginGUI extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         String userName = userName_text.getText();
         String password = password_text.getText();
-        if (!userName.isEmpty() && !password.isEmpty()) {
-            message.setText(" Hello " + userName);
-            productGUI = new ProductGUI();
-          //  this.setVisible(false);
+       /** if (ae.getSource() == submit) {
+            try {
+                Class.forName("com.mysql.jdbc.Driver").newInstance();
+                //Creating Connection Object
+                Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/myDatabase?autoReconnect=true&useSSL=false", "root", "omar7712378");
+                //Preapared Statement
+                PreparedStatement Pstatement = connection.prepareStatement("insert into users values(?,?)");
+                //Specifying the values of it's parameter
+                Pstatement.setString(1, userName);
+                Pstatement.setString(2, password);
 
-        } else {
-            message.setText(" Invalid user.. ");
-        }
+
+                JOptionPane.showMessageDialog(null, "Data Registered Successfully");
+
+
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }**/
+
+
+              if (!userName.isEmpty() && !password.isEmpty()) {
+               message.setText(" Hello " + userName);
+                 productGUI = new ProductGUI();
+              this.setVisible(false);
+
+             } else {
+                  message.setText(" Invalid user.. ");
+              }
+
     }
 }

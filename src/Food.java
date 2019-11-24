@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Food implements Products {
 
@@ -7,7 +6,6 @@ public class Food implements Products {
     private String name;
     private String price;
     private ArrayList<String> products = new ArrayList<String>();
-
 
 
     public Food() {
