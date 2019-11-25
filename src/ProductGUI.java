@@ -4,8 +4,8 @@ import javax.swing.*;
 
 public class ProductGUI extends JFrame {
 
-    private JPanel panel,panel2,panel3;
-    private JLabel p_name, message;
+    private JPanel panel,panel2;
+    private JLabel p_name;
     private JTextField txt_name;
     private JButton add_btn;
     private DefaultListModel<String> dlm = new DefaultListModel<String>();
@@ -33,17 +33,11 @@ public class ProductGUI extends JFrame {
         other = new Other();
         panel = new JPanel(new GridLayout(3, 3));
         panel2 = new JPanel(new GridLayout(2, 1));
-        panel3 = new JPanel(new GridLayout(2, 1));
         this.setTitle("Add Products");
         this.setSize(600, 800);
         this.setVisible(true);
         this.add(panel, BorderLayout.CENTER);
         this.add(panel2, BorderLayout.NORTH);
-        this.add(panel3, BorderLayout.SOUTH);
-
-
-
-        
         p_name = new JLabel();
         p_name.setText("Product Name :");
         txt_name = new JTextField();
@@ -51,7 +45,7 @@ public class ProductGUI extends JFrame {
         //list
         cb = new JComboBox<String>(choices);
         cb.setVisible(true);
-        panel.add(cb);
+
 
         // Submit
         add_btn = new JButton("Add");
@@ -63,12 +57,15 @@ public class ProductGUI extends JFrame {
         panel.add(list3);
         panel.add(list4);
 
+        list.setBackground(Color.pink);
+        list2.setBackground(Color.LIGHT_GRAY);
+        list3.setBackground(Color.yellow);
+        list4.setBackground(Color.red);
+
         panel2.add(p_name);
         panel2.add(txt_name);
-
-        message = new JLabel();
-        panel2.add(message);
         panel2.add(add_btn);
+        panel2.add(cb);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -79,25 +76,18 @@ public class ProductGUI extends JFrame {
                 choice = (String) cb.getSelectedItem();
                if (choice.matches("Food"))    {
                     food.setName(txt_name.getText());
-                    message.setText(food.getName());
                     dlm.addElement(food.getName());
 
                }else if (choice.matches("Clothes")){
                    clothes.setName(txt_name.getText());
-                   message.setText(clothes.getName());
                    dlm2.addElement(clothes.getName());
                }else if (choice.matches("Furniture")){
                    furniture.setName(txt_name.getText());
-                   message.setText(furniture.getName());
                    dlm3.addElement(furniture.getName());
 
                }else if (choice.matches("Other")) {
                      other.setName(txt_name.getText());
-                     message.setText(other.getName());
                      dlm4.addElement(other.getName());
-
-               }else{
-                   message.setText("Please choose one");
 
                }
 
